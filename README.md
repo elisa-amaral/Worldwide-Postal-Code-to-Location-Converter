@@ -9,8 +9,8 @@ This project is postal-code-to-location converter implementing asynchronous requ
 ## How to Use
 
 + Enter the Postal Code
-+ Enter the Country Code (see the refence list provided)
-+ Click on Convert
++ Enter the Country Code, it can be written in lower case or upper case + See [Country Code Refence List](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements) if necessary
++ Click on ***Convert*** to generate the public location data
 
 ## Technology Stack
 
