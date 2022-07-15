@@ -1,0 +1,91 @@
+*
+{
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+a:link,a:visited 
+{
+    color: rgb(0, 50, 212);
+    font-size: 1.2em;
+    font-weight: 500;
+    text-decoration: none !important;
+}
+  
+
+a:hover, a:active
+{
+  color: #00f7ff !important;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+::placeholder
+{
+    font-weight: 600;
+}
+
+#projectTitle
+{
+  font-size: 1.20em;
+  font-weight: 500;
+}
+
+.projectNavBar
+{
+    background-color: #ececec;
+}
+
+#convertButton, #convertButton strong
+{
+    margin-top: 40px;
+    font-size: 1.1em;
+}
+
+.inputField
+{
+    margin-top: 10px;
+}
+
+.inputLabel, .resultLabelTitle
+{
+    font-size: 1.2em;
+    font-weight: 500;
+    
+}
+
+input[type="text"]
+{
+    border: 1.5px solid gray;
+}
+input[type="text"], input:focus
+{
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+input[readonly]
+{
+  margin-top: 10px;
+  background-color: #fcfcfc !important;
+  color: #0026ce;
+  font-weight: 500;
+
+}
+
+.resultLabelTitle
+{
+    background-color: #a7fcff;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.resultLabel
+{
+    font-weight: 500;
+    font-size: 1.2em;
+    border-radius: 8px;
+    padding: 7px
+}
+
+
+

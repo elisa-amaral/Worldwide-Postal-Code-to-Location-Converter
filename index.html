@@ -1,0 +1,146 @@
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>Worldwide Postal-Code-to-Location Converter</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="icon" type="image/png" href="/logo.png" sizes="25x25">
+
+		<script>
+
+
+			function convertPostalCodeToLocation(postalCode, countryCode) 
+			{   
+                
+				postalCode = postalCode.replaceAll(/\s/g, "") // removes white spaces
+				postalCode = postalCode.replaceAll(/-/g, "") // removes dashes
+				postalCode = postalCode.replaceAll(/\./g, "") // removes dots
+
+				const apikey = "16f2f800-f870-11ec-9299-4d575d01240d"
+				const URL = "https://app.zipcodebase.com/api/v1/search?apikey="+apikey+"&codes="+postalCode+"&country="+countryCode
+                	
+				let xmlHttp = new XMLHttpRequest()
+				xmlHttp.open('GET', URL);
+				
+				xmlHttp.onreadystatechange = () => {
+
+					if(xmlHttp.readyState == 4 && xmlHttp.status == 200) 
+					{
+						let JSONLocationText = xmlHttp.responseText
+						let JSONLocationObject = JSON.parse(JSONLocationText)
+
+						const nestedArrays = ['results', postalCode, 0];
+						const nestedValues = nestedArrays.reduce((initialValue, currentValue) => initialValue[currentValue], JSONLocationObject);
+                    
+            
+						if(nestedValues.province === null)
+						{
+							document.getElementById('city_county').value = nestedValues.city
+
+						}
+						else
+						{   
+							document.getElementById('city_county').value = nestedValues.province
+						}
+
+						if((nestedValues.state_en === null || nestedValues.state_en === "") && (nestedValues.state === null || nestedValues.state === ""))
+						{
+							document.getElementById('state_province').value = 'Not Applicable'
+							
+						}
+						else
+						{
+							if(nestedValues.state === null || nestedValues.state === "")
+							{
+								document.getElementById('state_province').value = nestedValues.state_en
+							}
+							else
+							{
+								document.getElementById('state_province').value = nestedValues.state
+							}
+
+						}
+
+							
+					  
+
+
+						document.getElementById('latitude').value = nestedValues.latitude	
+						document.getElementById('longitude').value = nestedValues.longitude	
+						
+						console.log(nestedValues)
+						
+					}
+				}
+				
+					xmlHttp.send()
+			}
+		</script>
+	</head>
+	<body>
+		
+		<nav class="navbar navbar-light mb-4 projectNavBar">
+			<div class="container">
+				<div class="navbar-brand mb-0 h1">
+					<img src="logo.png">
+					<span id="projectTitle">Worldwide Postal-Code-to-Location Converter</span>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row form-group">
+				
+				<div class="col-sm-4">
+					<span class="inputLabel">Enter Postal Code</span></span>
+					<input type="text" class="form-control inputField" placeholder="Example: 10005" name="postalCode" id="postalCode">
+				</div>
+		        
+				
+				<div class="col-sm-4">
+					<span class="inputLabel">Enter Country Code</span><a class="label" href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="_blank" tabindex="-1">&nbsp;(Reference List)</a>
+					<input type="text" class="form-control inputField" placeholder='Example: US' name="countryCode" id="countryCode">
+				</div>
+
+				<div class="col-sm-2">
+                     <div id="convertButton">
+							<button class="btn btn-success" onclick="convertPostalCodeToLocation(document.getElementById('postalCode').value,document.getElementById('countryCode').value)"><strong>Convert</strong></button>
+					 </div>
+				    
+				</div>
+		    
+			</div>
+
+			<br>
+        
+			<div class="row form-group">
+				<div class="col-sm-3">
+					<span class="resultLabelTitle">Results</span>
+				</div>
+			</div>
+			
+			<div class="row form-group">
+				<div class="col-sm-2">
+					<span class="resultLabel">City/County</span>
+					<input readonly type="text" class="form-control" name="city_county" id="city_county">
+				</div>
+
+				<div class="col-sm-3">
+					<span class="resultLabel">State/Province</span>
+					<input readonly type="text" class="form-control"  name="state_province" id="state_province">
+				</div>
+
+				<div class="col-sm-2">
+					<span class="resultLabel">Latitude</span>
+					<input readonly type="text" class="form-control"  id="latitude" />
+				</div>
+
+				<div class="col-sm-2">
+					<span class="resultLabel">Longitude</span>
+					<input readonly type="text" class="form-control"  id="longitude" />
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>
