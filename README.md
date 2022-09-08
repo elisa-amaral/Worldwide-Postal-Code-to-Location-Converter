@@ -15,6 +15,8 @@ This project is a worldwide postal-code-to-location converter implementing async
 
 ## Technology Stack
 
+The project was built with:
+
 + JavaScript
 + AJAX
 + [Zipcodebase.com API](https://zipcodebase.com/)
