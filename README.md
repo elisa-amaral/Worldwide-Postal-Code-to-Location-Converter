@@ -2,6 +2,9 @@
 
 This project is a worldwide postal-code-to-location converter implementing asynchronous requests with JavaScript and XMLHTTPRequest (AJAX) through the request made to the Zipcodebase.com API that generates JSON files with public location data based on the ZIP Code (Postal Code).
 
+## Project Website
+https://postal-code-to-location-converter.netlify.app/
+
 ## Screenshot
 
 ![Screenshot](Screenshot.png)
